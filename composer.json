@@ -3,8 +3,8 @@
   "description": "Easily filter eloquent models",
   "type": "library",
   "require": {
-    "illuminate/database": "^7.14",
-    "illuminate/support": "^7.14"
+    "illuminate/database": "^7.0",
+    "illuminate/support": "^7.0"
   },
   "require-dev": {
     "orchestra/testbench": "^5.3",
