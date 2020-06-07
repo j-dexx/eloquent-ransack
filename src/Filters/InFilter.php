@@ -8,6 +8,13 @@ class InFilter extends BaseFilter
 {
     public function apply(Builder $query): Builder
     {
-        return $query->whereIn($this->getAttribute(), $this->getValue());
+        $values = (array) $this->getValue();
+        $values = array_filter($values);
+
+        if (empty($values)) {
+            return $query;
+        }
+
+        return $query->whereIn($this->getAttribute(), $values);
     }
 }

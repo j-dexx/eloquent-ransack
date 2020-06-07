@@ -17,4 +17,24 @@ class InFilterTest extends TestCase
 
         $this->assertStringContainsString('where "name" in (?)', $result->toSql());
     }
+
+    public function test_if_empty_returns_query(): void
+    {
+        $query = Post::query();
+        $filter = new InFilter('name', []);
+
+        $result = $filter->apply($query);
+
+        $this->assertStringNotContainsString('where "name" in (?)', $result->toSql());
+    }
+
+    public function test_if_array_with_empty_string_returns_query(): void
+    {
+        $query = Post::query();
+        $filter = new InFilter('name', ['']);
+
+        $result = $filter->apply($query);
+
+        $this->assertStringNotContainsString('where "name" in (?)', $result->toSql());
+    }
 }

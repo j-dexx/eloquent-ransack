@@ -8,6 +8,13 @@ class NotInFilter extends BaseFilter
 {
     public function apply(Builder $query): Builder
     {
-        return $query->whereNotIn($this->getAttribute(), $this->getValue());
+        $values = (array) $this->getValue();
+        $values = array_filter($values);
+
+        if (empty($values)) {
+            return $query;
+        }
+
+        return $query->whereNotIn($this->getAttribute(), $values);
     }
 }
